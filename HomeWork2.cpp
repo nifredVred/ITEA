@@ -1,41 +1,71 @@
-﻿// Test.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
-
-#include <iostream>
+﻿
 #include <Limits>
+#include <cmath>
+#include <iostream>
 
+int main(int arg, char const* argv[]) {
+	constexpr int Integer_Max_Value = std::numeric_limits<int>::max();
+	constexpr int Integer_Min_Value = std::numeric_limits<int>::min();
+	long long a;
 
-int main(int arg, char const* argv[])
-{
-	short a;
-	int b;
-	long c;
-	long long e;
+	std::cout << "C++ Program to Solve Quadratic" << std::endl
+		<< "Please enter coefficients: a, b and c in rang ["
+		<< Integer_Max_Value << " to " << Integer_Min_Value
+		<< "] to solve the square equation\n"
+		<< std::endl
+		<< "Please enter a" << std::endl;
 
-	char ch = 25;
-	wchar_t ch1 = 33;
+	std::cin >> a;
 
-	double f;
-	long double g;
-	/// ieee 754
+	if (a != 0 && a >= Integer_Min_Value && a <= Integer_Max_Value) {
+		long long b;
+		std::cout << std::endl << "Please enter b" << std::endl;
+		std::cin >> b;
 
+		if (b >= Integer_Min_Value && b <= Integer_Max_Value) {
+			long long c;
+			std::cout << std::endl << "Please enter c" << std::endl;
+			std::cin >> c;
 
-	std::cout << sizeof(a) << " "  << sizeof(b) << " " << sizeof(c) << " ";
-	std::cout << '\n' << std::numeric_limits<short>::min() << std::endl;
+			if (c >= Integer_Min_Value && c <= Integer_Max_Value) {
 
+				const unsigned int NUMBER_2 = 2;
+				const unsigned int NUMBER_4 = 4;
+				const auto D = b * b - NUMBER_4 * a * c;
+				const auto SQURE_ROOT_D = std::sqrt(D);
+				const auto A_TWICE = NUMBER_2 * a;
 
-	//переменные универсального типа 
+				if (D == 0) {
+					auto x_1 = (-b) / A_TWICE;
+
+					std::cout << "There is only one real root x1 = x2 = " << x_1 << "\n";
+				}
+				else if (D > 0) {
+					auto x_1 = (-b - SQURE_ROOT_D) / A_TWICE;
+					auto x_2 = (-b + SQURE_ROOT_D) / A_TWICE;
+
+					std::cout << "There are two real roots x1 = " << x_1
+						<< " and x2 = " << x_2 << std::endl;
+
+				}
+				else if (D < 0) {
+					std::cout << "This equation does not have a solution"
+						<< "\n";
+				}
+			}
+			else
+				std::cout << "c dose not fit the range from" << Integer_Min_Value
+				<< " to " << Integer_Max_Value << "\n";
+
+		}
+		else
+			std::cout << "b dose not fit the range from" << Integer_Min_Value
+			<< " to " << Integer_Max_Value << "\n";
+
+	}
+	else
+		std::cout << "a dose not fit the range from" << Integer_Min_Value << " to "
+		<< Integer_Max_Value << "\n";
+
 	return 0;
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
